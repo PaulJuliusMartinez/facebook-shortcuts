@@ -51,7 +51,14 @@ FacebookShortcuts.prototype.selectChat = function(num) {
 // Pretty ugly DOM traversl here, navigate up to the element that holds
 // the entire popup, then find the one H4 element, which is the header
 FacebookShortcuts.prototype.minimizeChat = function() {
-	$(':focus').parent().parent().parent().find('H4').click();
+	// Check if nothing in focus
+	if ($(':focus').length == 0) return;
+	// Check if we're actually in a chat window
+	if ($(':focus').get(0).tagName != 'TEXTAREA') return;
+	// Make sure we're in the correct text area
+	var popupSection = $(':focus').parent().parent();
+	if (!popupSection.hasClass('fbNubFlyoutFooter')) return;
+	popupSection.parent().find('H4').click();
 }
 
 FacebookShortcuts.prototype.onKeyPress = function(event) {
