@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Facebook Chat Shortcuts",
+  "description": "Adds simple shortcuts for navigating Facebook Chat",
+  "version": "1.0",
+
+  "permissions": [
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+
+  // Only run on facebook
+  "content_scripts": [
+    {
+      "matches": ["http://www.facebook.com/*", "https://www.facebook.com/*"],
+      "js": ["jquery.js", "shortcuts.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
